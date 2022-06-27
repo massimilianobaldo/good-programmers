@@ -1,0 +1,3 @@
+name: iac
+runtime: nodejs
+description: A IaC program for create an OIDC application in Okta
