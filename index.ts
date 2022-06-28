@@ -16,3 +16,11 @@ const group: okta.group.Group = new okta.group.Group("group", {
     name: "Good Programmers",
     description: "A little clique of friends which are good programmers",
 });
+
+// Create an application
+const application: okta.app.OAuth = new okta.app.OAuth("application", {
+    label: "Application Name",
+    grantTypes: ["authorization_code"],
+    redirectUris: ["https://example.com/"],
+    type: "web",
+});
