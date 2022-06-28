@@ -10,3 +10,9 @@ const user: okta.user.User = new okta.user.User("user", {
     expirePasswordOnCreate: true,
     password: "haskellIsBetter"
 });
+
+// Create a group
+const group: okta.group.Group = new okta.group.Group("group", {
+    name: "Good Programmers",
+    description: "A little clique of friends which are good programmers",
+});
