@@ -24,3 +24,12 @@ const application: okta.app.OAuth = new okta.app.OAuth("application", {
     redirectUris: ["https://example.com/"],
     type: "web",
 });
+
+// Create the server authentication
+const server: okta.auth.Server = new okta.auth.Server("authentication-server", {
+    audiences: [application.id], //client id
+    description: "My Example Auth Server",
+    issuerMode: "ORG_URL",
+    status: "ACTIVE",
+    name: "authentication-server",
+})
