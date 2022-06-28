@@ -45,3 +45,21 @@ const groupAssignment: okta.app.GroupAssignment = new okta.app.GroupAssignment("
     groupId: group.id,
     appId: application.id
 });
+
+// Create the policy for request data dromt he authentication server
+const policy: okta.auth.ServerPolicy = new okta.auth.ServerPolicy("policy-good-programmers", {
+    authServerId: server.id,
+    clientWhitelists: ["ALL_CLIENTS"],
+    description: "A policy for know who are the good programmer",
+    priority: 1
+});
+
+// Add a rule for the policy of the authentication server
+const rulePolicy: okta.auth.ServerPolicyRule = new okta.auth.ServerPolicyRule("rule-policy", {
+    authServerId: server.id,
+    grantTypeWhitelists: ["authorization_code"],
+    policyId: policy.id,
+    priority: 1,
+    groupWhitelists: [group.id],
+    scopeWhitelists: ["*"]
+});
