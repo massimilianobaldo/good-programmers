@@ -1,1 +1,6 @@
 encryptionsalt: v1:ENwbBbe7XgA=:v1:ehmZcu1CQfwj12FW:fa4O5Mv441LW3xVpTRqk6EnwtjsHgQ==
+config:
+  okta:apiToken:
+    secure: v1:Chi0Xd55VRXyiBAZ:01Sz6Xuudm+SQvOqP011heReTNnQx2ZwNfk85/WNquqUKmj9lKg5gnFDxd7OWkh/zlpBmnXinssnKQ==
+  okta:baseUrl: okta.com
+  okta:orgName: dev-36922372
