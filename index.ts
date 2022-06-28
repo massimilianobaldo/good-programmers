@@ -32,4 +32,16 @@ const server: okta.auth.Server = new okta.auth.Server("authentication-server", {
     issuerMode: "ORG_URL",
     status: "ACTIVE",
     name: "authentication-server",
-})
+});
+
+// Add the user to the group
+const groupMembership = new okta.GroupMemberships("user-group-assignment", {
+    groupId: group.id,
+    users: [user.id]
+});
+
+// Create a group assignment for user only in the "good programmer" group
+const groupAssignment: okta.app.GroupAssignment = new okta.app.GroupAssignment("good-programmer", {
+    groupId: group.id,
+    appId: application.id
+});
