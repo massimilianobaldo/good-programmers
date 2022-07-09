@@ -6,5 +6,9 @@
     "dependencies": {
         "@pulumi/okta": "^3.11.0",
         "@pulumi/pulumi": "^3.0.0"
-    }
+    },
+    "workspaces": [
+        "app",
+        "api"
+    ]
 }
