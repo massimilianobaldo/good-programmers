@@ -1,9 +1,11 @@
 <template>
     <h1>Are you a Good Programmers? &#128064;</h1>
     <h2>In order to discover it, you need to login using Okta</h2>
-    <div>
-        <button v-if="authState && authState.isAuthenticated" @click="logout">Logout</button>
-        <button v-else @click="login">Login</button>
+    <div v-if="authState && authState.isAuthenticated">
+        <button @click="logout">Logout</button>
+    </div>
+    <div v-else>
+        <button @click="login">Login</button>
     </div>
 </template>
 
