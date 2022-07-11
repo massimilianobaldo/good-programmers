@@ -1,4 +1,10 @@
 import * as okta from "@pulumi/okta";
+import * as pulumi from "@pulumi/pulumi";
+import { writeFileSync } from "fs";
+
+// Create configurator and get access to config variables
+const config = new pulumi.Config();
+const urlApp = config.require("urlApp");
 
 // Create a user
 const user: okta.user.User = new okta.user.User("user", {
