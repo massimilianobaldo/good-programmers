@@ -22,11 +22,12 @@ const group: okta.group.Group = new okta.group.Group("group", {
 
 // Create an application
 const application: okta.app.OAuth = new okta.app.OAuth("application", {
-    label: "Application Name",
-    grantTypes: ["authorization_code"],
-    redirectUris: ["https://example.com/"],
-    type: "web",
-    tokenEndpointAuthMethod: "none",
+    label: "Are you a Good Programmer?",
+    grantTypes: ["authorization_code", "refresh_token"],
+    redirectUris: [`${urlApp}/login/callback`],
+    postLogoutRedirectUris: [`${urlApp}`],
+    type: "browser",
+    tokenEndpointAuthMethod: "none"
 });
 
 // Create the server authentication
@@ -36,6 +37,12 @@ const server: okta.auth.Server = new okta.auth.Server("authentication-server", {
     issuerMode: "ORG_URL",
     status: "ACTIVE",
     name: "auth-server-good-programmers",
+});
+
+// Create a truted origin for development mode
+const trustedOrigin: okta.trustedorigin.Origin = new okta.trustedorigin.Origin("localhost", {
+    origin: `${urlApp}`,
+    scopes: ["CORS", "REDIRECT"],
 });
 
 // Add the user to the group
