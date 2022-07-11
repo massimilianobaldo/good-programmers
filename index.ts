@@ -117,3 +117,16 @@ const rulePolicy: okta.auth.ServerPolicyRule = new okta.auth.ServerPolicyRule("r
     groupWhitelists: [groupGoodProgrammers.id, groupBadProgrammers.id],
     scopeWhitelists: ["*"]
 });
+
+// Create some alias for better accessing to variables
+const clientId = application.id;
+const issuerUri = server.issuer;
+const audience = server.audiences;
+
+// Create Output<string> for interlopate the string template into env vairables
+const envApp: pulumi.Output<string> = pulumi.interpolate`VITE_CLIENT_ID=${clientId}\nVITE_ISSUER_URI=${issuerUri}`;
+const envApi: pulumi.Output<string> = pulumi.interpolate`ISSUER_URI=${issuerUri}\nAUDIENCE=${audience}`;
+
+// Write the ".env" file for the frontend and the api
+envApp.apply((envoriment) => writeFileSync("./app/.env.local", envoriment));
+envApi.apply((envoriment) => writeFileSync("./api/.env.local", envoriment));
