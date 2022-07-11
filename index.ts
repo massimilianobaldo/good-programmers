@@ -7,11 +7,39 @@ const config = new pulumi.Config();
 const urlApp = config.require("urlApp");
 
 // Create a user
-const user: okta.user.User = new okta.user.User("user", {
-    email: "hcurry@pulumi-okta.com",
-    login: "hcurry@pulumi-okta.com",
+const userHaskell: okta.user.User = new okta.user.User("userHaskell", {
+    email: "hcurry@test.com",
+    login: "hcurry@test.com",
     firstName: "Haskell",
-    lastName: "Curry"
+    middleName: "Brooks",
+    lastName: "Curry",
+    title: "Professor",
+    displayName: "hcurry",
+    city: "Centre County",
+    state: "Pennsylvania"
+});
+
+const userBjarne: okta.user.User = new okta.user.User("userBjarne", {
+    email: "bstroustrup@test.com",
+    login: "bstroustrup@test.com",
+    firstName: "Bjarne",
+    lastName: "Stroustrup",
+    title: "Professor",
+    displayName: "bstroustrup",
+    city: "Harlem",
+    state: "New York"
+});
+
+const userGuido: okta.user.User = new okta.user.User("userGuido", {
+    email: "grossum@test.com",
+    login: "grossum@test.com",
+    firstName: "Guido",
+    middleName: "van",
+    lastName: "Rossum",
+    title: "Distinguished Engineer",
+    displayName: "grossum",
+    city: "Haarlem",
+    state: "Netherlands"
 });
 
 // Create a group
