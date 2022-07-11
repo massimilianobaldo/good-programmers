@@ -43,9 +43,14 @@ const userGuido: okta.user.User = new okta.user.User("userGuido", {
 });
 
 // Create a group
-const group: okta.group.Group = new okta.group.Group("group", {
+const groupGoodProgrammers: okta.group.Group = new okta.group.Group("group-good-programmers", {
     name: "Good Programmers",
     description: "A little clique of friends which are good programmers",
+});
+
+const groupBadProgrammers: okta.group.Group = new okta.group.Group("group-bad-programmers", {
+    name: "Bad Programmers",
+    description: "Some programmers that have made big mistakes",
 });
 
 // Create an application
@@ -74,14 +79,24 @@ const trustedOrigin: okta.trustedorigin.Origin = new okta.trustedorigin.Origin("
 });
 
 // Add the user to the group
-const groupMembership = new okta.GroupMemberships("user-group-assignment", {
-    groupId: group.id,
-    users: [user.id]
+const groupMembershipGoodProgrammers = new okta.GroupMemberships("assignment-good-programmers", {
+    groupId: groupGoodProgrammers.id,
+    users: [userHaskell.id, userBjarne.id]
+});
+
+const groupMembershipBadProgrammers = new okta.GroupMemberships("assignment-bad-programmers", {
+    groupId: groupBadProgrammers.id,
+    users: [userGuido.id]
 });
 
 // Create a group assignment for user only in the "good programmer" group
-const groupAssignment: okta.app.GroupAssignment = new okta.app.GroupAssignment("good-programmer", {
-    groupId: group.id,
+const groupAssignmentGoodProgammers: okta.app.GroupAssignment = new okta.app.GroupAssignment("group-app-good-programmer", {
+    groupId: groupGoodProgrammers.id,
+    appId: application.id
+});
+
+const groupAssignmentBadProgrammers: okta.app.GroupAssignment = new okta.app.GroupAssignment("group-app-bad-programmer", {
+    groupId: groupBadProgrammers.id,
     appId: application.id
 });
 
@@ -99,6 +114,6 @@ const rulePolicy: okta.auth.ServerPolicyRule = new okta.auth.ServerPolicyRule("r
     grantTypeWhitelists: ["authorization_code"],
     policyId: policy.id,
     priority: 1,
-    groupWhitelists: [group.id],
+    groupWhitelists: [groupGoodProgrammers.id, groupBadProgrammers.id],
     scopeWhitelists: ["*"]
 });
