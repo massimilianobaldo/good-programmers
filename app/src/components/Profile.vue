@@ -1,33 +1,28 @@
 <template>
-    <table>
-        <thead>
-            <tr>
-                <th>Claim</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(claim, index) in claims" :key="index">
-                <td>{{ claim.claim }}</td>
-                <td :id="'claim-' + claim.claim">{{ claim.value }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <ul v-if="claims">
+    <li v-for="(value, key) in claims">
+      <p><strong>{{key}}</strong>: {{value}}</p>
+    </li>
+  </ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script>
+import axios from 'axios'
 
-export default defineComponent({
-    name: 'Profile',
-    data() {
-        return {
-            claims: [] as { claim: string; value: unknown; }[]
-        }
-    },
-    async created() {
-        const idToken = await this.$auth.tokenManager.get('idToken')
-        this.claims = await Object.entries(idToken.claims).map(entry => ({ claim: entry[0], value: entry[1] }))
+export default {
+  data () {
+    return {
+      claims: []
     }
-})
+  },
+  async created () {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.$auth.getAccessToken()}`
+    try {
+      const response = await axios.get(`/api/whoami`)
+      this.claims = response.data
+    } catch (e) {
+      console.error(`Errors! ${e}`)
+    }
+  }
+}
 </script>
