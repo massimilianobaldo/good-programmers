@@ -1,24 +1,35 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/profile">Profile</router-link>
   </nav>
   <router-view></router-view>
+  <footer>
+    <p>Created using <a href="https://vuejs.org/guide/introduction.html" target="_blank">Vue</a> + <a href="https://www.typescriptlang.org/docs/" target="_blank">Typescript</a> and generated using <a href="https://vitejs.dev/guide/" target="_blank">Vue</a></p>
+  </footer>
 </template>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  padding: 20px;
+}
+
+
+footer {
+  padding: 20px;
 }
 </style>
