@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  pulumi:
+    image: "pulumi/pulumi-nodejs"
+    env_file: .env
+    working_dir: /pulumi-okta
+    volumes:
+      - .:/pulumi-okta
+    command: npm install
+    command: ["npm", "ci", "&&", "pulumi", "up", "-s", "dev", "--non-interactive", "--yes"]
+
+  api:
+    image: "node:latest"
+    ports:
+      - "4000:4000"
+    working_dir: /pulumi-okta/api
+    volumes_from:
+      - pulumi
+    command: npm start
+
+  spa:
+    image: "node:latest"
+    ports:
+      - "3000:3000"
+    working_dir: /pulumi-okta/app
+    volumes_from:
+      - pulumi
+    depends_on:
+      - api
+    command: npm start
