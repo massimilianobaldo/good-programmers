@@ -19,38 +19,10 @@ const userHaskell: okta.user.User = new okta.user.User("userHaskell", {
     state: "Pennsylvania"
 });
 
-const userBjarne: okta.user.User = new okta.user.User("userBjarne", {
-    email: "bstroustrup@test.com",
-    login: "bstroustrup@test.com",
-    firstName: "Bjarne",
-    lastName: "Stroustrup",
-    title: "Professor",
-    displayName: "bstroustrup",
-    city: "Harlem",
-    state: "New York"
-});
-
-const userGuido: okta.user.User = new okta.user.User("userGuido", {
-    email: "grossum@test.com",
-    login: "grossum@test.com",
-    firstName: "Guido",
-    middleName: "van",
-    lastName: "Rossum",
-    title: "Distinguished Engineer",
-    displayName: "grossum",
-    city: "Haarlem",
-    state: "Netherlands"
-});
-
 // Create a group
 const groupGoodProgrammers: okta.group.Group = new okta.group.Group("group-good-programmers", {
     name: "Good Programmers",
     description: "A little clique of friends which are good programmers",
-});
-
-const groupBadProgrammers: okta.group.Group = new okta.group.Group("group-bad-programmers", {
-    name: "Bad Programmers",
-    description: "Some programmers that have made big mistakes",
 });
 
 // Create an application
@@ -81,22 +53,12 @@ const trustedOrigin: okta.trustedorigin.Origin = new okta.trustedorigin.Origin("
 // Add the user to the group
 const groupMembershipGoodProgrammers = new okta.GroupMemberships("assignment-good-programmers", {
     groupId: groupGoodProgrammers.id,
-    users: [userHaskell.id, userBjarne.id]
-});
-
-const groupMembershipBadProgrammers = new okta.GroupMemberships("assignment-bad-programmers", {
-    groupId: groupBadProgrammers.id,
-    users: [userGuido.id]
+    users: [userHaskell.id]
 });
 
 // Create a group assignment for user only in the "good programmer" group
 const groupAssignmentGoodProgammers: okta.app.GroupAssignment = new okta.app.GroupAssignment("group-app-good-programmer", {
     groupId: groupGoodProgrammers.id,
-    appId: application.id
-});
-
-const groupAssignmentBadProgrammers: okta.app.GroupAssignment = new okta.app.GroupAssignment("group-app-bad-programmer", {
-    groupId: groupBadProgrammers.id,
     appId: application.id
 });
 
@@ -114,7 +76,7 @@ const rulePolicy: okta.auth.ServerPolicyRule = new okta.auth.ServerPolicyRule("r
     grantTypeWhitelists: ["authorization_code"],
     policyId: policy.id,
     priority: 1,
-    groupWhitelists: [groupGoodProgrammers.id, groupBadProgrammers.id],
+    groupWhitelists: [groupGoodProgrammers.id],
     scopeWhitelists: ["*"]
 });
 
