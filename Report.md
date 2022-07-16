@@ -1,9 +1,3 @@
----
-title: "Iac with Pulumi and Okta: a journey in the Infrastructure As Code methodology"
-author: "Massimiliano Baldo"
-date: 20/06/2022
----
-
 # Iac with Pulumi and Okta: a journey in the Infrastructure As Code methodology
 
 ## Introduction
