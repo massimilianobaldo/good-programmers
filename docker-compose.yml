@@ -6,17 +6,21 @@ services:
     working_dir: /pulumi-okta
     volumes:
       - .:/pulumi-okta
-    command: npm install
-    command: ["npm", "ci", "&&", "pulumi", "up", "-s", "dev", "--non-interactive", "--yes"]
+    command: >
+      sh -c "npm i && 
+            pulumi preview -s dev --non-interactive"
 
   api:
     image: "node:latest"
     ports:
       - "4000:4000"
     working_dir: /pulumi-okta/api
+    command: npm start
     volumes_from:
       - pulumi
-    command: npm start
+    depends_on:
+      - pulumi
+    command: ["../wait-for-env.sh", "npm", "start"]
 
   spa:
     image: "node:latest"
@@ -26,5 +30,6 @@ services:
     volumes_from:
       - pulumi
     depends_on:
+      - pulumi
       - api
-    command: npm start
+    command: ["../wait-for-env.sh", "npm", "start"]
