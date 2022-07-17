@@ -16,7 +16,7 @@ git clone https://github.com/massimilianobaldo/good-programmers
 
 ## Usage
 
-Ensure that you have setup a correct Pulumi's stack with the correct data from Okta.
+Ensure that you have setup a Pulumi's stack with the correct data from Okta.
 
 Here is a [guide](https://www.pulumi.com/registry/packages/okta/installation-configuration/).
 
