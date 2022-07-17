@@ -1,4 +1,4 @@
-# Are you a Good Programmers? :eyes:
+# Are you a Good Programmer? :eyes:
 
 This project was developed alongside the company [Kynetics](https://www.kynetics.com/) with the Univeristy of Padova.
 
