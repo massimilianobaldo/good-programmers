@@ -18,6 +18,10 @@ git clone https://github.com/massimilianobaldo/good-programmers
 
 ### Native mode
 
+You need to have installed:
+* Node 16+
+* Pulumi CLI (already loged-in)
+
 The simple usage is to install all the dependecies
 
 ```bash
@@ -28,6 +32,28 @@ Then, use the Pulumi CLI to provide the infrastructure
 
 ```bash
 pulumi up
+```
+
+Change the `vite.config.ts` file under the folder `api` in order to use the correct host:
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:4000",
+        changeOrigin: true,
+        secure: false,
+        ws: true
+      }
+    }
+  },
+  plugins: [vue()]
+})
 ```
 
 Lastly, run in two different terminals
@@ -50,10 +76,7 @@ PULUMI_ACCESS_TOKEN=your-pulumi-token
 PULUMI_CONFIG_PASSPHRASE=""
 ```
 
-Then launch `docker compose up` and go to `localhost:3000`.
-
-> It'possible that the first time dosen't work since the pulumi service is too slow.  
-> Make a second attempt when the pulumi service has create the ".env.loal" files.
+Then launch `docker compose up` and wait until you see to go to `localhost:3000`.
 
 ## License
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
