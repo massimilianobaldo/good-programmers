@@ -32,7 +32,7 @@ Again, this action has to be done **one server at time**.
 
 Using a IaC tool, it's possbile to create and change the configuration of resources in any moment, without use dashboard or fill forms.
 
-Back again to the example, suppose that you use an IaC tool, you create the first resource and then, if you need more of it, you simply copy/paste the same lines of code.
+Back again to the example, suppose that you use an IaC tool, you create the first resource and then, if you need more of it, you could simply copy/paste the same lines of code. Since the IaC tool is based on a programming language, a better approach can be to use loops and variables or even custom functions.
 
 Moreover, if you need to change a configuration for a specific resource, you modify the lines in which the resource is delcared and re-execute the deployment.
 
@@ -53,7 +53,7 @@ This make the development faster.
 
 Moreover, it's possible to use some benefits from the underlying programming language.
 
-Some examples: it's feasible to control the execution flow with conditionals, create complex class or structure, wrap everything inside a script in order to automatize repetitive tasks, and so on.
+Some examples: it's feasible to control the execution flow with conditionals, use loops and cycles, create complex class or structure, wrap everything inside a script in order to automatize repetitive tasks, and so on.
 
 A more detail explanation is reported in the Pulumi's [site](https://www.pulumi.com/docs/intro/).
 
